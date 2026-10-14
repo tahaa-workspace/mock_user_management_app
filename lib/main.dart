@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mock_task_radixweb/screens/user_list_screen.dart';
+import 'package:mock_task_radixweb/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       title: 'User Management',
-      home: UserListScreen(),
+      home: HomeScreen(),
     );
   }
 }
