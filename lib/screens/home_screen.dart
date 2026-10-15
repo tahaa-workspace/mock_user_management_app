@@ -60,6 +60,20 @@ class HomeScreen extends StatelessWidget {
             ),
             buildElevatedButton(
               context,
+              'My local change test button',
+              Icons.format_align_center,
+                  () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        LoginScreen(),
+                  ),
+                );
+              },
+            ),
+            buildElevatedButton(
+              context,
               'Task Manager',
               Icons.task,
                   () {
