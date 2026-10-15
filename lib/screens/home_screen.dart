@@ -109,6 +109,12 @@ class HomeScreen extends StatelessWidget {
               Icons.touch_app,
               () {},
             ),
+            buildElevatedButton(
+              context,
+              'Another Button (No Navigation)',
+              Icons.radio_button_unchecked,
+              () {},
+            ),
           ],
         ),
       ),
