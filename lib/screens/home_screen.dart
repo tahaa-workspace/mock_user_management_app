@@ -91,10 +91,21 @@ class HomeScreen extends StatelessWidget {
               'Additional Button Navigating to No Where',
               Icons.smart_button,
               () {},
+            ),buildElevatedButton(
+              context,
+              'Additional Button Navigating to No Where2',
+              Icons.smart_button,
+              () {},
             ),
             buildElevatedButton(
               context,
               'New Non-Navigating Button',
+              Icons.touch_app,
+              () {},
+            ),
+            buildElevatedButton(
+              context,
+              'New Non-Navigating Button2',
               Icons.touch_app,
               () {},
             ),
