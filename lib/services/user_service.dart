@@ -1,26 +1,29 @@
-import 'package:dio/dio.dart';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 
 import '../models/user.dart';
 
 class UserService {
-  final Dio dio = Dio();
-
   Future<List<User>> fetchUsers() async {
-    try {
-      final response = await dio.get(
-        'https://jsonplaceholder.typicode.com/users',
-      );
+    final response = await http.get(
+      Uri.parse('https://jsonplaceholder.typicode.com/users'),
+    );
 
-      final List<dynamic> data = response.data;
-      print('data = $data');
-      print('data = ${data
-          .map((json) => User.fromJson(json))
-          .toList()}');
-      return data
-          .map((json) => User.fromJson(json))
-          .toList();
-    } on DioException catch (e) {
-      throw Exception('Failed to fetch users: ${e.message}');
+    if (response.statusCode != 200) {
+      throw Exception(
+        'Failed to fetch users. HTTP status: ${response.statusCode}',
+      );
     }
+
+    final decodedData = jsonDecode(response.body);
+
+    if (decodedData is! List) {
+      throw const FormatException('Expected a list of users from the API.');
+    }
+
+    return decodedData
+        .map((json) => User.fromJson(json as Map<String, dynamic>))
+        .toList();
   }
 }
