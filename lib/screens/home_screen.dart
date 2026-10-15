@@ -72,7 +72,12 @@ class HomeScreen extends StatelessWidget {
                 );
               },
             ),
-
+            buildElevatedButton(
+              context,
+              'Additional Button Navigating to No Where',
+              Icons.smart_button,
+              () {},
+            ),
           ],
         ),
       ),
