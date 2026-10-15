@@ -4,7 +4,7 @@ import 'package:mock_task_radixweb/screens/user_detail_screen.dart';
 import 'package:mock_task_radixweb/widgets/user_tile.dart';
 
 import '../controllers/user_controller.dart';
-import 'add_user_screen.dart │.dart';
+import 'add_user_screen.dart';
 
 class UserListScreen extends StatelessWidget {
   UserListScreen({super.key});
@@ -20,6 +20,7 @@ class UserListScreen extends StatelessWidget {
           IconButton(
             onPressed: controller.fetchUsers,
             icon: const Icon(Icons.refresh),
+            tooltip: 'Refresh users',
           ),
         ],
       ),
@@ -51,9 +52,6 @@ class UserListScreen extends StatelessWidget {
             const SizedBox(height: 16),
             Expanded(
               child: Obx(() {
-                print('isLoading = ${controller.isLoading.value}');
-                print('errorMessage = ${controller.errorMessage.value}');
-                print('users = ${controller.users}');
                 if (controller.isLoading.value) {
                   return const Center(child: CircularProgressIndicator());
                 }
@@ -79,7 +77,9 @@ class UserListScreen extends StatelessWidget {
                 }
 
                 if (controller.filteredUsers.isEmpty) {
-                  return Center(child: Text('No matching users found.'));
+                  return const Center(
+                    child: Text('No matching users found.'),
+                  );
                 }
 
                 return ListView.builder(
