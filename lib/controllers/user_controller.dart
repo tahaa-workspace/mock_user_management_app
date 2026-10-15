@@ -24,6 +24,7 @@ class UserController extends GetxController {
 
       final fetchedUsers = await userService.fetchUsers();
       users.assignAll(fetchedUsers);
+      _applySearch();
     } catch (e) {
       errorMessage.value = e.toString();
     } finally {
@@ -31,31 +32,29 @@ class UserController extends GetxController {
     }
   }
 
-  Future<void> searchUsers(String query) async {
+  void searchUsers(String query) {
     searchText.value = query;
-    if (query.trim().isEmpty) {
+    _applySearch();
+  }
+
+  void _applySearch() {
+    final query = searchText.value.trim().toLowerCase();
+
+    if (query.isEmpty) {
       filteredUsers.assignAll(users);
       return;
     }
-    final searchQuery = query.toLowerCase().trim();
 
     final results = users.where((user) {
-      print('user = ${user}');
-      return user.name.toLowerCase().contains(searchQuery) ||
-          user.email.toLowerCase().contains(searchQuery);
+      return user.name.toLowerCase().contains(query) ||
+          user.email.toLowerCase().contains(query);
     }).toList();
-    print('results = $results');
 
     filteredUsers.assignAll(results);
   }
 
   void addUser(User user) {
     users.add(user);
-
-    if (searchText.value.trim().isEmpty) {
-      filteredUsers.add(user);
-    } else {
-      searchUsers(searchText.value);
-    }
+    _applySearch();
   }
 }
