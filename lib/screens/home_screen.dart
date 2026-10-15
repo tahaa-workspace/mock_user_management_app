@@ -92,6 +92,12 @@ class HomeScreen extends StatelessWidget {
               Icons.smart_button,
               () {},
             ),
+            buildElevatedButton(
+              context,
+              'New Non-Navigating Button',
+              Icons.touch_app,
+              () {},
+            ),
           ],
         ),
       ),
